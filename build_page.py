@@ -57,7 +57,7 @@ def side_html(key, label, kicker, data, n):
       <p class="kicker">{kicker}</p>
       <h2 id="{key.lower()}-h">{label}</h2>
       <figure>
-        <img src="{data['src']}" alt="{data['alt']}" width="1600" height="1120" loading="lazy" decoding="async" />
+        <img src="{data['src']}" alt="{data['alt']}" width="1600" height="1120" />
         <figcaption><span class="fig-n">Figure {n}.</span> {data['cap']}</figcaption>
       </figure>
       <h3 class="decisions-h">Design decisions and rationale</h3>
