@@ -1,212 +1,230 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Project 2 Report: Group 37</title>
-        <style>
-            :root {
-                --color-neutral-95: hsl(220 10% 95%);
-                --color-neutral-90: hsl(220 10% 90%);
-                --color-neutral-80: hsl(220 10% 80%);
-                --color-neutral-70: hsl(220 10% 70%);
-                --color-neutral-60: hsl(220 10% 60%);
-                --color-neutral-50: hsl(220 10% 50%);
-                --color-neutral-40: hsl(220 10% 40%);
-                --color-neutral-30: hsl(220 10% 30%);
-                --color-neutral-20: hsl(220 10% 20%);
-                --color-neutral-10: hsl(220 10% 10%);
-            }
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Who drives the climate crisis? · DSC 106 Project 2 · Group 37</title>
+  <meta name="description" content="DSC 106 Project 2, Group 37: two persuasive visualizations of the same World Bank CO2 data, one for and one against the proposition that China, not the West, is now the main driver of the climate crisis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Crimson+Pro:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #14171c;
+      --ink-2: #3d4450;
+      --muted: #5b6370;
+      --rule: #dfe2e7;
+      --paper: #ffffff;
+      --page: #f6f5f1;
+      --tint: #f1f0ec;
+      --accent: #2b2f36;
+      --measure: 68ch;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font: 400 1.0625rem/1.65 "Atkinson Hyperlegible", system-ui, sans-serif;
+    }
+    a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
-            html {
-                font: 100%/1.5 system-ui;
-                counter-reset: figure;
-                background: var(--color-neutral-95);
-                max-width: min(75vw, 80em);
-                margin: 0 auto;
-            }
+    .wrap { max-width: 960px; margin: 0 auto; padding: 0 1.25rem; }
+    .prose { max-width: var(--measure); }
 
-            /* Headings */
+    /* Masthead */
+    header.masthead { padding: 3.5rem 0 2.25rem; }
+    .tag {
+      display: inline-block; font-size: 0.8125rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin: 0 0 1rem;
+    }
+    h1, h2, h3, h4 { font-family: "Crimson Pro", Georgia, serif; color: var(--ink); text-wrap: balance; }
+    h1 { font-size: clamp(2.4rem, 6.4vw, 4.25rem); line-height: 1.02; letter-spacing: -0.015em; margin: 0 0 1.25rem; font-weight: 700; }
+    .dek { font-size: 1.1875rem; color: var(--ink-2); margin: 0 0 1.75rem; max-width: 60ch; }
+    .byline { font-size: 0.9375rem; color: var(--ink-2); margin: 0; }
+    .byline span { white-space: nowrap; }
+    .byline em { font-style: normal; color: var(--muted); }
 
-            h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                line-height: 1.1;
-                font-weight: 600;
-                text-wrap: balance;
-            }
+    /* Proposition */
+    .proposition {
+      margin: 2.25rem 0 0; padding: 1.5rem 0 0; border-top: 2px solid var(--ink);
+    }
+    .proposition p.label { font-size: 0.8125rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.5rem; }
+    .proposition blockquote {
+      margin: 0; font-family: "Crimson Pro", Georgia, serif; font-weight: 600;
+      font-size: clamp(1.6rem, 3.6vw, 2.3rem); line-height: 1.15;
+    }
+    .meta { font-size: 0.9375rem; color: var(--muted); margin: 1rem 0 0; }
 
-            h1,
-            h2 {
-                border-bottom: 1px solid var(--color-neutral-80);
-                padding-bottom: 0.2em;
-            }
+    /* Sides */
+    main { background: var(--paper); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .side { padding: 3rem 0 2.5rem; border-bottom: 1px solid var(--rule); }
+    .side:last-of-type { border-bottom: 0; }
+    .kicker {
+      display: inline-block; margin: 0 0 0.5rem; padding: 0.15rem 0.6rem;
+      font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--paper); background: var(--ink); border-radius: 2px;
+    }
+    .side h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); line-height: 1.1; margin: 0 0 1.5rem; }
 
-            h1 {
-                margin-block: 1em 0.5rem;
-                font-size: clamp(2.5em, 150% + 2vh + 2vw, 10vmin);
-                font-weight: 800;
+    figure { margin: 0 0 2rem; }
+    figure img {
+      display: block; width: 100%; height: auto; background: var(--paper);
+      border: 1px solid var(--rule); border-radius: 4px;
+    }
+    figcaption { margin-top: 0.75rem; font-size: 0.9375rem; color: var(--ink-2); max-width: var(--measure); }
+    .fig-n { font-weight: 700; color: var(--ink); }
 
-                small {
-                    display: block;
-                    width: fit-content;
-                    padding: 0.2em 0.5em;
-                    margin-inline: auto;
-                    color: white;
-                    background: var(--color-neutral-40);
-                    font-size: 40%;
-                    text-transform: uppercase;
-                    white-space: nowrap;
-                }
-            }
+    .decisions-h { font-size: 1.375rem; margin: 0 0 1rem; }
+    ol.decisions { list-style: none; margin: 0; padding: 0; counter-reset: d; }
+    .decision {
+      counter-increment: d; padding: 1.25rem 0; border-top: 1px solid var(--rule);
+    }
+    .decision-head { display: grid; grid-template-columns: 1fr auto; gap: 0.75rem 1.5rem; align-items: start; }
+    .decision h4 { font-size: 1.25rem; line-height: 1.2; margin: 0; }
+    .decision h4::before { content: counter(d) ". "; color: var(--muted); }
+    .decision p { margin: 0.6rem 0 0; max-width: var(--measure); color: var(--ink-2); }
 
-            h2 {
-                font-size: 180%;
-                color: var(--color-neutral-30);
-            }
+    /* -2..+2 diverging scale, monochrome so it never reads as the charts' red or blue */
+    .scale { display: flex; align-items: center; gap: 0.45rem; font-size: 0.8125rem; color: var(--muted); white-space: nowrap; }
+    .track { position: relative; width: 112px; height: 6px; background: linear-gradient(90deg, #9aa0a8, #e3e5e8 50%, #9aa0a8); border-radius: 3px; }
+    .track .mid { position: absolute; left: 50%; top: -4px; width: 1px; height: 14px; background: var(--muted); }
+    .track .dot {
+      position: absolute; top: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px;
+      border-radius: 50%; background: var(--ink); border: 2px solid var(--paper);
+      box-shadow: 0 0 0 1px var(--ink);
+    }
+    .score { font-weight: 700; color: var(--ink); min-width: 6.5em; }
+    .score small { font-weight: 400; color: var(--muted); font-size: 1em; }
 
-            h3 {
-                font-size: 130%;
-            }
+    /* Reflection */
+    .reflection { padding: 3rem 0 3.5rem; }
+    .reflection h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); margin: 0 0 1.25rem; }
+    .reflection p { margin: 0 0 1.1rem; }
+    .reflection p:first-of-type::first-letter {
+      font-family: "Crimson Pro", Georgia, serif; float: left; font-size: 3.4em; line-height: 0.85;
+      padding: 0.08em 0.08em 0 0; font-weight: 700;
+    }
 
-            /* Lists */
+    footer { padding: 2rem 0 3rem; font-size: 0.875rem; color: var(--muted); }
+    footer p { margin: 0 0 0.4rem; max-width: var(--measure); }
 
-            ul,
-            ol {
-                padding-inline-start: 2em;
-            }
+    @media (max-width: 640px) {
+      body { font-size: 1rem; }
+      header.masthead { padding-top: 2.25rem; }
+      .decision-head { grid-template-columns: 1fr; }
+      .byline span { white-space: normal; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+    @media print { body { background: #fff; } main { border: 0; } .side { break-inside: avoid-page; } }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <p class="tag">DSC 106 · Project 2 · Persuasive or deceptive visualization?</p>
+      <h1>Same data, opposite verdicts</h1>
+      <p class="dek">Two charts built from one World Bank series. One argues China now drives the climate crisis; the other argues the United States does. Every number on both is correct.</p>
+      <p class="byline"><strong>Group 37</strong> ·
+        <span>Aryen Palkar <em>apalkar@ucsd.edu</em></span> ·
+        <span>Haoyu Lin <em>hal150@ucsd.edu</em></span> ·
+        <span>Jayden Liauw <em>jliauw@ucsd.edu</em></span></p>
+      <div class="proposition">
+        <p class="label">Proposition</p>
+        <blockquote>“China, not the West, is now the main driver of the climate crisis.”</blockquote>
+        <p class="meta">Dataset: World Bank climate-change indicators (CO<sub>2</sub> emissions in kilotonnes and per capita), 1960–2018, from the cleaned course repository. Scores run from −2 (fully deceptive) to +2 (fully earnest).</p>
+      </div>
+    </div>
+  </header>
 
-            li {
-                &::marker {
-                    color: var(--color-neutral-40);
-                }
+  <main>
+    <div class="wrap">
+    <section class="side" id="for" aria-labelledby="for-h">
+      <p class="kicker">Argues it’s true</p>
+      <h2 id="for-h">For the proposition</h2>
+      <figure>
+        <img src="for.png" alt="Line chart of annual CO2 emissions from 1990 to 2018. China's line, in red, rises from about 2,200 to 10,300 million tonnes and crosses the combined total of the US and EU around 2010; the US stays near 5,000 and the EU falls from 3,600 to 2,900." width="1600" height="1120" loading="lazy" decoding="async" />
+        <figcaption><span class="fig-n">Figure 1.</span> Annual CO<sub>2</sub> emissions, 1990–2018. China (red) against the United States and the European Union, in million tonnes. The arrow marks where China's line passes the US and EU total.</figcaption>
+      </figure>
+      <h3 class="decisions-h">Design decisions and rationale</h3>
+      <ol class="decisions">
+        <li class="decision">
+          <div class="decision-head"><h4>Absolute national totals, not per person</h4><div class="scale" role="img" aria-label="Score −1 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:25.0%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−1 <small>deceptive</small></span></div></div>
+          <p>A country of 1.4 billion is compared with ones of 330 and 450 million as if they were the same size. Totals are what make China's line tower over the others; per person China emitted 7.4 tonnes in 2018 against 15.2 for the US, and that version would have argued the other side. We kept totals because the proposition is about who drives the crisis, and the atmosphere does count totals, which is the defensible half of the choice.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>The window starts in 1990</h4><div class="scale" role="img" aria-label="Score −0.5 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:37.5%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−0.5 <small>deceptive</small></span></div></div>
+          <p>By 1990 US and EU emissions had already flattened, so their lines read as a steady state rather than the tail of a century of growth, while China's line starts low and climbs the whole way. Starting at 1960, the first year in the data, would add three decades where the US sits well above China, and the chart's story would arrive late. 1990 is also a common starting point for emissions accounting, so the cut doesn't look chosen.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>The comparison is China against the US and EU <em>combined</em>, stated in an annotation</h4><div class="scale" role="img" aria-label="Score −0.5 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:37.5%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−0.5 <small>deceptive</small></span></div></div>
+          <p>Picking two rich economies and adding them together builds a benchmark that exists to be crossed. In the checkpoint we drew it as a dashed US + EU line; following feedback we removed the line, pointed the arrow at the exact crossing (2010.1, where the two series meet), and moved the numbers into the label: 9,278 vs 8,289 million tonnes in 2011. The chart is cleaner, and the claim is now checkable in the label instead of implied by a constructed line.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>China in red, everything else in grey</h4><div class="scale" role="img" aria-label="Score −0.5 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:37.5%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−0.5 <small>deceptive</small></span></div></div>
+          <p>The colour does the arguing before the reader reads anything: one actor is highlighted and alarming, the others recede. Red also carries a warning connotation that a neutral highlight colour wouldn't. A single neutral hue for all three would have been more even-handed, but the crossover would no longer be the first thing a reader sees.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>Y-axis from zero, both axes labelled, every line labelled directly, source and unit conversion printed on the chart</h4><div class="scale" role="img" aria-label="Score +2 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:100.0%"></span></span><span class="scale-end">+2</span><span class="score earnest">+2 <small>earnest</small></span></div></div>
+          <p>Nothing about the scale is manipulated, which is exactly why the chart is persuasive: a reader who looks for the usual tricks finds none, so the framing choices above go unquestioned.</p>
+        </li>
+      </ol>
+    </section>
+    <section class="side" id="against" aria-labelledby="against-h">
+      <p class="kicker">Argues it’s false</p>
+      <h2 id="against-h">Against the proposition</h2>
+      <figure>
+        <img src="against.png" alt="Line chart of cumulative CO2 emitted since 1960. The United States, in blue, rises to 279 billion tonnes by 2018; China reaches 205 and the European Union 192. An annotation compares China's per-person emissions in 2018 (7.4 tonnes) with America's in 1960 (16.0 tonnes)." width="1600" height="1120" loading="lazy" decoding="async" />
+        <figcaption><span class="fig-n">Figure 2.</span> Cumulative CO<sub>2</sub> emitted since 1960, in billion tonnes (bn t). The United States (blue) against China and the European Union, 1960–2018.</figcaption>
+      </figure>
+      <h3 class="decisions-h">Design decisions and rationale</h3>
+      <ol class="decisions">
+        <li class="decision">
+          <div class="decision-head"><h4>A running total instead of yearly emissions</h4><div class="scale" role="img" aria-label="Score +0.5 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:62.5%"></span></span><span class="scale-end">+2</span><span class="score earnest">+0.5 <small>earnest</small></span></div></div>
+          <p>We computed the cumulative sum of each year's emissions from 1960. The title's premise is true and is the strongest argument on this side: carbon dioxide stays in the atmosphere for centuries, so warming tracks the total ever emitted, not this year's output. It is the same series as the other chart, transformed once, and it reverses the ranking. We scored it slightly earnest because the measure is the one climate scientists use for responsibility, and the transformation is printed under the chart.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>"Stays in the air for centuries," but the sum starts in 1960</h4><div class="scale" role="img" aria-label="Score −1 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:25.0%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−1 <small>deceptive</small></span></div></div>
+          <p>The title invites the reader to think about all of history, while the data only goes back to 1960. That gap happens to favour our side: emissions before 1960 were overwhelmingly American and European, so a longer window would widen the US lead. We still count it as deceptive, because the title promises a scope the chart doesn't deliver and most readers won't notice the axis says "since 1960."</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>The per-person annotation compares China today with America in 1960</h4><div class="scale" role="img" aria-label="Score −1 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:25.0%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−1 <small>deceptive</small></span></div></div>
+          <p>7.4 tonnes against 16.0 lands as a moral point: China in 2018 is cleaner per person than the US was sixty years ago. The honest comparison was available and almost as strong, since the US was still at 15.2 tonnes in 2018. We picked 1960 because it is more striking, and because it mixes a second measure into a cumulative chart where nobody expects one.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>The EU shown as one bloc, and the US in blue against grey</h4><div class="scale" role="img" aria-label="Score −0.5 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:37.5%"></span></span><span class="scale-end">+2</span><span class="score deceptive">−0.5 <small>deceptive</small></span></div></div>
+          <p>Treating 27 countries as one makes the US the single largest line; split into member states, the US would lead every one by far more, so this choice actually understates our case. The blue highlight does the same work the red does on the other chart, while the calmer colour keeps this side from looking like an accusation.</p>
+        </li>
+        <li class="decision">
+          <div class="decision-head"><h4>Units spelled out, both axes labelled, axis from zero, totals labelled at each line's end</h4><div class="scale" role="img" aria-label="Score +1.5 on a scale from −2 (fully deceptive) to +2 (fully earnest)"><span class="scale-end">−2</span><span class="track"><span class="mid"></span><span class="dot" style="left:87.5%"></span></span><span class="scale-end">+2</span><span class="score earnest">+1.5 <small>earnest</small></span></div></div>
+          <p>Following feedback, the y-axis now defines "bn t" as billion tonnes and the x-axis is labelled, so the 279 / 205 / 192 end labels can be read without guessing. As with the other chart, honest scaffolding makes the framing harder to question.</p>
+        </li>
+      </ol>
+    </section>
+    </div>
+  </main>
 
-                + li {
-                    margin-top: 0.2em;
-                }
-            }
-
-            /* Sectioning elements */
-
-            header {
-                padding-block: 1em;
-                text-align: center;
-            }
-
-            main {
-                background: white;
-                color: var(--color-neutral-20);
-                border-radius: 1rem;
-                padding: 0.1rem 2rem;
-            }
-
-            /* Figures */
-
-            figure img {
-                max-width: 100%;
-                height: auto;
-            }
-
-            figure {
-                margin: 1em 0;
-                padding: 0.5rem;
-                margin-inline: -0.5em;
-                border: 1px solid var(--color-neutral-80);
-                box-shadow: 0 0.1em 0.2em var(--color-neutral-95);
-                text-align: center;
-                background: white;
-
-                > figcaption {
-                    font: 500 75% var(--font-sans);
-                    background: var(--color-neutral-95);
-                    padding: 0.5rem;
-                    margin: -0.5rem;
-                    margin-top: 0.5rem;
-                    counter-increment: figure;
-                    text-align: left;
-
-                    &::before {
-                        content: "Figure " counter(figure) ": ";
-                        font-weight: bold;
-                        color: var(--color-neutral-40);
-                    }
-
-                    a:not(:hover, :focus, :active) {
-                        color: inherit;
-                        text-decoration: underline;
-                        text-decoration-color: color-mix(
-                            in lab,
-                            currentColor,
-                            transparent 70%
-                        );
-                    }
-                }
-            }
-        </style>
-    </head>
-
-    <body>
-        <header>
-            <h1>
-                <small>Project 2</small>
-                Persuasive or Deceptive Visualization?
-            </h1>
-
-            <p><strong>Group 37:</strong> Aryen Palkar — <em>apalkar@ucsd.edu</em> · Haoyu Lin — <em>hal150@ucsd.edu</em> · Jayden Liauw — <em>jliauw@ucsd.edu</em></p>
-            <p>Dataset: World Bank climate-change indicators (CO<sub>2</sub> emissions in kt and per capita), 1960–2018, from the cleaned course repository.</p>
-        </header>
-
-        <main>
-            <h2>Proposition: “China, not the West, is now the main driver of the climate crisis.”</h2>
-
-            <section>
-                <h3>FOR the Proposition</h3>
-
-                <figure>
-                    <img src="for.png" alt="Line chart of annual CO2 emissions from 1990 to 2018. China's line, in red, rises from about 2,200 to 10,300 million tonnes and crosses the combined total of the US and EU around 2010; the US stays near 5,000 and the EU falls from 3,600 to 2,900." />
-                    <figcaption>Annual CO<sub>2</sub> emissions, 1990–2018. China (red) against the United States and the European Union, in million tonnes. The arrow marks where China's line passes the US and EU total.</figcaption>
-                </figure>
-
-                <p>Design Decisions and Rationale:</p>
-
-                <ul>
-                    <li><strong>Absolute national totals, not per person (−1).</strong> A country of 1.4 billion is compared with ones of 330 and 450 million as if they were the same size. Totals are what make China's line tower over the others; per person China emitted 7.4 tonnes in 2018 against 15.2 for the US, and that version would have argued the other side. We kept totals because the proposition is about who drives the crisis, and the atmosphere does count totals, which is the defensible half of the choice.</li>
-                    <li><strong>The window starts in 1990 (−0.5).</strong> By 1990 US and EU emissions had already flattened, so their lines read as a steady state rather than the tail of a century of growth, while China's line starts low and climbs the whole way. Starting at 1960, the first year in the data, would add three decades where the US sits well above China, and the chart's story would arrive late. 1990 is also a common starting point for emissions accounting, so the cut doesn't look chosen.</li>
-                    <li><strong>The comparison is China against the US and EU <em>combined</em>, stated in an annotation (−0.5).</strong> Picking two rich economies and adding them together builds a benchmark that exists to be crossed. In the checkpoint we drew it as a dashed US + EU line; following feedback we removed the line, pointed the arrow at the exact crossing (2010.1, where the two series meet), and moved the numbers into the label: 9,278 vs 8,289 million tonnes in 2011. The chart is cleaner, and the claim is now checkable in the label instead of implied by a constructed line.</li>
-                    <li><strong>China in red, everything else in grey (−0.5).</strong> The colour does the arguing before the reader reads anything: one actor is highlighted and alarming, the others recede. Red also carries a warning connotation that a neutral highlight colour wouldn't. A single neutral hue for all three would have been more even-handed, but the crossover would no longer be the first thing a reader sees.</li>
-                    <li><strong>Y-axis from zero, both axes labelled, every line labelled directly, source and unit conversion printed on the chart (+2).</strong> Nothing about the scale is manipulated, which is exactly why the chart is persuasive: a reader who looks for the usual tricks finds none, so the framing choices above go unquestioned.</li>
-                </ul>
-            </section>
-
-            <section>
-                <h3>AGAINST the Proposition</h3>
-
-                <figure>
-                    <img src="against.png" alt="Line chart of cumulative CO2 emitted since 1960. The United States, in blue, rises to 279 billion tonnes by 2018; China reaches 205 and the European Union 192. An annotation compares China's per-person emissions in 2018 (7.4 tonnes) with America's in 1960 (16.0 tonnes)." />
-                    <figcaption>Cumulative CO<sub>2</sub> emitted since 1960, in billion tonnes (bn t). The United States (blue) against China and the European Union, 1960–2018.</figcaption>
-                </figure>
-
-                <p>Design Decisions and Rationale:</p>
-
-                <ul>
-                    <li><strong>A running total instead of yearly emissions (+0.5).</strong> We computed the cumulative sum of each year's emissions from 1960. The title's premise is true and is the strongest argument on this side: carbon dioxide stays in the atmosphere for centuries, so warming tracks the total ever emitted, not this year's output. It is the same series as the other chart, transformed once, and it reverses the ranking. We scored it slightly earnest because the measure is the one climate scientists use for responsibility, and the transformation is printed under the chart.</li>
-                    <li><strong>"Stays in the air for centuries," but the sum starts in 1960 (−1).</strong> The title invites the reader to think about all of history, while the data only goes back to 1960. That gap happens to favour our side: emissions before 1960 were overwhelmingly American and European, so a longer window would widen the US lead. We still count it as deceptive, because the title promises a scope the chart doesn't deliver and most readers won't notice the axis says "since 1960."</li>
-                    <li><strong>The per-person annotation compares China today with America in 1960 (−1).</strong> 7.4 tonnes against 16.0 lands as a moral point: China in 2018 is cleaner per person than the US was sixty years ago. The honest comparison was available and almost as strong, since the US was still at 15.2 tonnes in 2018. We picked 1960 because it is more striking, and because it mixes a second measure into a cumulative chart where nobody expects one.</li>
-                    <li><strong>The EU shown as one bloc, and the US in blue against grey (−0.5).</strong> Treating 27 countries as one makes the US the single largest line; split into member states, the US would lead every one by far more, so this choice actually understates our case. The blue highlight does the same work the red does on the other chart, while the calmer colour keeps this side from looking like an accusation.</li>
-                    <li><strong>Units spelled out, both axes labelled, axis from zero, totals labelled at each line's end (+1.5).</strong> Following feedback, the y-axis now defines "bn t" as billion tonnes and the x-axis is labelled, so the 279 / 205 / 192 end labels can be read without guessing. As with the other chart, honest scaffolding makes the framing harder to question.</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2>Final Reflection</h2>
-
-                <p>The hardest part was that nothing we did required changing a single number. Both charts come from the same 59 years of the same World Bank series, and every value on them is correct. The whole difference between "China is the problem" and "America is the problem" is two decisions: whether you add the years up or look at them one at a time, and whether you count countries or people. We expected the deceptive work to happen on the axes. Instead, almost all of it happened in choosing the question, and the axes ended up being the most honest part of both charts.</p>
+  <section class="reflection" aria-labelledby="refl-h">
+    <div class="wrap prose">
+      <h2 id="refl-h">Final reflection</h2>
+      <p>The hardest part was that nothing we did required changing a single number. Both charts come from the same 59 years of the same World Bank series, and every value on them is correct. The whole difference between "China is the problem" and "America is the problem" is two decisions: whether you add the years up or look at them one at a time, and whether you count countries or people. We expected the deceptive work to happen on the axes. Instead, almost all of it happened in choosing the question, and the axes ended up being the most honest part of both charts.</p>
 
 <p>The checkpoint feedback surprised us in a useful way. The chart we had rated most deceptive, an index of emissions relative to 1990 with a title that framed 1990 as the year the world agreed to cut emissions, was also the one a reader couldn't follow, because the units weren't clear. The deception that was cleverest on paper simply didn't land. The arrow on our first chart pointed at China's 2011 value rather than at the point where the lines actually crossed, a small inaccuracy in a chart with no intentional trick in it, and the feedback caught it. Precision turned out to be part of persuasion. A reader who spots one careless detail stops trusting the rest.</p>
 
 <p>We now think of ethical visualization as a test you can apply after the fact. Imagine the reader learns everything we knew while making the chart, every alternative we considered and rejected. If they would still reach the same conclusion, the choice was persuasion. If the conclusion depends on them not knowing something, it was deception. By that test our AGAINST chart mostly survives: a full history before 1960 would only strengthen it, and the honest per-person comparison (15.2 tonnes against 7.4) makes the same point as the one we chose. Our FOR chart mostly doesn't, because a reader who saw per-person numbers would no longer accept that China, emitting half as much per person as the US, is the main driver. That was uncomfortable to realise, since FOR is the chart with no tricks on its axes at all.</p>
-            </section>
-        </main>
-    </body>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p>Source: World Bank, World Development Indicators, climate-change indicators, via
+        <a href="https://github.com/light-and-salt/World-Bank-Data-by-Indicators">light-and-salt/World-Bank-Data-by-Indicators</a>.
+        Charts are regenerated from the data by <a href="https://github.com/AryenP/dsc106-project2/blob/main/make_viz.py">make_viz.py</a>.</p>
+      <p>DSC 106, Fall 2026, UC San Diego.</p>
+    </div>
+  </footer>
+</body>
 </html>
